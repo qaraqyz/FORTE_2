@@ -1,0 +1,207 @@
+2025-10-21 14:16:05 - conversational_agent - INFO - Получено сообщение от пользователя: привет
+2025-10-21 14:16:05 - conversational_agent - INFO - Отправка запроса в OpenAI, модель: gpt-4.1
+2025-10-21 14:16:07 - conversational_agent - INFO - Получен ответ от OpenAI, tool_calls: 0
+2025-10-21 14:16:07 - conversational_agent - INFO - Ответ сгенерирован успешно, визуализаций: 0
+2025-10-21 14:16:16 - conversational_agent - INFO - Получено сообщение от пользователя: Сравни продажи за последние 2 месяца
+2025-10-21 14:16:16 - conversational_agent - INFO - Отправка запроса в OpenAI, модель: gpt-4.1
+2025-10-21 14:16:17 - conversational_agent - INFO - Получен ответ от OpenAI, tool_calls: 1
+2025-10-21 14:16:17 - conversational_agent - INFO - Вызов инструмента: generate_sql, аргументы: {'query_description': 'Сравнить общие продажи (выручку) за последние два месяца по всей аптечной сети.'}
+2025-10-21 14:16:19 - conversational_agent - INFO - SQL сгенерирован: WITH current_month AS (
+    SELECT SUM(revenue) as revenue
+    FROM sales
+    WHERE date >= DATE_TRUNC('month', CURRENT_DATE) AND date < DATE_TRUNC('month', CURRENT_DATE) + INTERVAL '1 month'
+),
+previous_month AS (
+    SELECT SUM(revenue) as revenue
+    FROM sales
+    WHERE date >= DATE_TRUNC('month', CURRENT_DATE) - INTERVAL '1 month' AND date < DATE_TRUNC('month', CURRENT_DATE')
+)
+SELECT
+    c.revenue as current_revenue,
+    p.revenue as previous_revenue,
+    ROUND(((c.revenue - p.revenue) / p.revenue) * 100, 2) as percent_change
+FROM current_month c, previous_month p;
+2025-10-21 14:16:20 - conversational_agent - INFO - Ответ сгенерирован успешно, визуализаций: 0
+2025-10-21 14:25:25 - conversational_agent - INFO - Получено сообщение от пользователя: Сравни продажи за последние 2 месяца
+2025-10-21 14:25:25 - conversational_agent - INFO - Отправка запроса в OpenAI, модель: gpt-4o
+2025-10-21 14:25:27 - conversational_agent - INFO - Получен ответ от OpenAI, tool_calls: 0
+2025-10-21 14:25:27 - conversational_agent - INFO - Ответ сгенерирован успешно, визуализаций: 0
+2025-10-21 14:25:40 - conversational_agent - INFO - Получено сообщение от пользователя: все
+2025-10-21 14:25:40 - conversational_agent - INFO - Отправка запроса в OpenAI, модель: gpt-4o
+2025-10-21 14:25:41 - conversational_agent - INFO - Получен ответ от OpenAI, tool_calls: 1
+2025-10-21 14:25:41 - conversational_agent - INFO - Вызов инструмента: generate_sql, аргументы: {'query_description': 'Сравнить общие продажи всех категорий за последние 2 месяца'}
+2025-10-21 14:25:44 - conversational_agent - INFO - SQL сгенерирован: WITH current_month AS (
+    SELECT SUM(revenue) as revenue
+    FROM sales
+    WHERE date >= DATE_TRUNC('month', CURRENT_DATE) AND date < DATE_TRUNC('month', CURRENT_DATE) + INTERVAL '1 month'
+),
+previous_month AS (
+    SELECT SUM(revenue) as revenue
+    FROM sales
+    WHERE date >= DATE_TRUNC('month', CURRENT_DATE) - INTERVAL '1 month' AND date < DATE_TRUNC('month', CURRENT_DATE')
+)
+SELECT
+    c.revenue as current_revenue,
+    p.revenue as previous_revenue,
+    ROUND(((c.revenue - p.revenue) / p.revenue) * 100, 2) as percent_change
+FROM current_month c, previous_month p;
+2025-10-21 14:25:45 - conversational_agent - INFO - Ответ сгенерирован успешно, визуализаций: 0
+2025-10-21 14:28:47 - conversational_agent - INFO - Получено сообщение от пользователя: Сравни продажи за последние 2 месяца
+2025-10-21 14:28:47 - conversational_agent - INFO - Отправка запроса в OpenAI, модель: gpt-4o
+2025-10-21 14:28:48 - conversational_agent - INFO - Получен ответ от OpenAI, tool_calls: 0
+2025-10-21 14:28:48 - conversational_agent - INFO - Ответ сгенерирован успешно, визуализаций: 0
+2025-10-21 14:29:05 - conversational_agent - INFO - Получено сообщение от пользователя: все препараты 
+2025-10-21 14:29:05 - conversational_agent - INFO - Отправка запроса в OpenAI, модель: gpt-4o
+2025-10-21 14:29:06 - conversational_agent - INFO - Получен ответ от OpenAI, tool_calls: 1
+2025-10-21 14:29:06 - conversational_agent - INFO - Вызов инструмента: generate_sql, аргументы: {'query_description': 'Сравнить общие продажи всех препаратов за последние два месяца'}
+2025-10-21 14:29:09 - conversational_agent - INFO - SQL сгенерирован: WITH current_month AS (
+    SELECT SUM(revenue) as revenue
+    FROM sales
+    WHERE date >= DATE_TRUNC('month', CURRENT_DATE) AND date < DATE_TRUNC('month', CURRENT_DATE) + INTERVAL '1 month'
+),
+previous_month AS (
+    SELECT SUM(revenue) as revenue
+    FROM sales
+    WHERE date >= DATE_TRUNC('month', CURRENT_DATE) - INTERVAL '1 month' AND date < DATE_TRUNC('month', CURRENT_DATE)
+)
+SELECT
+    c.revenue as current_revenue,
+    p.revenue as previous_revenue,
+    ROUND(((c.revenue - p.revenue) / p.revenue) * 100, 2) as percent_change
+FROM current_month c, previous_month p;
+2025-10-21 14:29:09 - conversational_agent - INFO - Автоматически выполняем сгенерированный SQL...
+2025-10-21 14:29:10 - conversational_agent - INFO - SQL выполнен, получено 1 строк
+2025-10-21 14:29:10 - conversational_agent - ERROR - Ошибка при обработке сообщения: Error code: 400 - {'error': {'message': "Invalid parameter: messages with role 'tool' must be a response to a preceeding message with 'tool_calls'.", 'type': 'invalid_request_error', 'param': 'messages.[6].role', 'code': None}}
+Traceback (most recent call last):
+  File "/Users/laurashamykhanova/Desktop/Forte/pharmacy-rag-assistant/agents/conversational_agent.py", line 197, in chat
+    result = self._chat_openai()
+  File "/Users/laurashamykhanova/Desktop/Forte/pharmacy-rag-assistant/agents/conversational_agent.py", line 276, in _chat_openai
+    final_response = self.client.chat.completions.create(
+  File "/Users/laurashamykhanova/Library/Python/3.9/lib/python/site-packages/openai/_utils/_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/laurashamykhanova/Library/Python/3.9/lib/python/site-packages/openai/resources/chat/completions/completions.py", line 1156, in create
+    return self._post(
+  File "/Users/laurashamykhanova/Library/Python/3.9/lib/python/site-packages/openai/_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/Users/laurashamykhanova/Library/Python/3.9/lib/python/site-packages/openai/_base_client.py", line 1047, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': "Invalid parameter: messages with role 'tool' must be a response to a preceeding message with 'tool_calls'.", 'type': 'invalid_request_error', 'param': 'messages.[6].role', 'code': None}}
+2025-10-21 14:32:46 - conversational_agent - INFO - Получено сообщение от пользователя: привет
+2025-10-21 14:32:46 - conversational_agent - INFO - Отправка запроса в OpenAI, модель: gpt-4o
+2025-10-21 14:32:47 - conversational_agent - INFO - Получен ответ от OpenAI, tool_calls: 0
+2025-10-21 14:32:47 - conversational_agent - INFO - Ответ сгенерирован успешно, визуализаций: 0
+2025-10-21 14:32:51 - conversational_agent - INFO - Получено сообщение от пользователя: Топ-10 препаратов по продажам
+2025-10-21 14:32:51 - conversational_agent - INFO - Отправка запроса в OpenAI, модель: gpt-4o
+2025-10-21 14:32:54 - conversational_agent - INFO - Получен ответ от OpenAI, tool_calls: 0
+2025-10-21 14:32:54 - conversational_agent - INFO - Ответ сгенерирован успешно, визуализаций: 0
+2025-10-21 14:33:00 - conversational_agent - INFO - Получено сообщение от пользователя: за год
+2025-10-21 14:33:00 - conversational_agent - INFO - Отправка запроса в OpenAI, модель: gpt-4o
+2025-10-21 14:33:01 - conversational_agent - INFO - Получен ответ от OpenAI, tool_calls: 1
+2025-10-21 14:33:01 - conversational_agent - INFO - Вызов инструмента: generate_sql, аргументы: {'query_description': 'Топ-10 препаратов по продажам за последний год'}
+2025-10-21 14:33:03 - conversational_agent - INFO - SQL сгенерирован: SELECT
+    product,
+    SUM(revenue) as total_revenue,
+    SUM(units_sold) as total_units
+FROM sales
+WHERE date >= '2022-10-01'
+GROUP BY product
+ORDER BY total_revenue DESC
+LIMIT 10;
+2025-10-21 14:33:03 - conversational_agent - INFO - Автоматически выполняем сгенерированный SQL...
+2025-10-21 14:33:03 - conversational_agent - INFO - SQL выполнен успешно, получено 10 строк
+2025-10-21 14:33:06 - conversational_agent - INFO - Ответ сгенерирован успешно, визуализаций: 0
+2025-10-21 14:33:21 - conversational_agent - INFO - Получено сообщение от пользователя: а график сделать можешь?
+2025-10-21 14:33:21 - conversational_agent - INFO - Отправка запроса в OpenAI, модель: gpt-4o
+2025-10-21 14:33:24 - conversational_agent - INFO - Получен ответ от OpenAI, tool_calls: 1
+2025-10-21 14:33:24 - conversational_agent - INFO - Вызов инструмента: create_visualization, аргументы: {'data': '[{"product":"Амоксициллин","total_revenue":"416368732.49"},{"product":"Витамин D3","total_revenue":"416224230.45"},{"product":"Кларитин","total_revenue":"414467674.38"},{"product":"Супрадин","total_revenue":"411409127.58"},{"product":"Панадол","total_revenue":"408760341.52"},{"product":"Нурофен","total_revenue":"408047758.97"},{"product":"Ампициллин","total_revenue":"407967170.70"},{"product":"Цетрин","total_revenue":"407532860.08"},{"product":"Парацетамол","total_revenue":"405034269.89"},{"product":"Супрастин","total_revenue":"404732283.65"}]', 'chart_type': 'bar', 'title': 'Топ-10 препаратов по продажам за последний год', 'x_column': 'product', 'y_column': 'total_revenue'}
+2025-10-21 14:33:24 - conversational_agent - INFO - Создание визуализации: bar, записей: 10
+2025-10-21 14:33:25 - conversational_agent - INFO - Визуализация создана успешно
+2025-10-21 14:33:26 - conversational_agent - INFO - Ответ сгенерирован успешно, визуализаций: 1
+2025-10-21 23:58:03 - conversational_agent - INFO - Получено сообщение от пользователя: привет
+2025-10-21 23:58:03 - conversational_agent - INFO - Отправка запроса в OpenAI, модель: gpt-4o
+2025-10-21 23:58:05 - conversational_agent - INFO - Получен ответ от AI, tool_calls: 0
+2025-10-21 23:58:05 - conversational_agent - INFO - Ответ сгенерирован успешно, визуализаций: 0
+2025-10-21 23:59:39 - conversational_agent - INFO - Получено сообщение от пользователя: хай
+2025-10-21 23:59:39 - conversational_agent - INFO - Отправка запроса в OpenAI, модель: gpt-4o
+2025-10-21 23:59:42 - conversational_agent - INFO - Получен ответ от AI, tool_calls: 0
+2025-10-21 23:59:42 - conversational_agent - INFO - Ответ сгенерирован успешно, визуализаций: 0
+2025-10-22 09:35:41 - conversational_agent - INFO - Получено сообщение от пользователя: какая самая продаваемый препарат? 
+2025-10-22 09:35:41 - conversational_agent - INFO - Отправка запроса в OpenAI, модель: gpt-4o
+2025-10-22 09:35:42 - conversational_agent - INFO - Получен ответ от AI, tool_calls: 0
+2025-10-22 09:35:42 - conversational_agent - INFO - Ответ сгенерирован успешно, визуализаций: 0
+2025-10-22 09:35:50 - conversational_agent - INFO - Получено сообщение от пользователя: на весь год
+2025-10-22 09:35:50 - conversational_agent - INFO - Отправка запроса в OpenAI, модель: gpt-4o
+2025-10-22 09:35:52 - conversational_agent - INFO - Получен ответ от AI, tool_calls: 1
+2025-10-22 09:35:52 - conversational_agent - INFO - Вызов инструмента: generate_sql, аргументы: {'query_description': 'Найти самый продаваемый препарат по выручке за текущий год'}
+2025-10-22 09:35:53 - conversational_agent - INFO - SQL сгенерирован: SELECT
+    product,
+    SUM(revenue) as total_revenue
+FROM sales
+WHERE DATE_TRUNC('year', date) = DATE_TRUNC('year', CURRENT_DATE)
+GROUP BY product
+ORDER BY total_revenue DESC
+LIMIT 1;
+2025-10-22 09:35:53 - conversational_agent - INFO - Автоматически выполняем сгенерированный sql...
+2025-10-22 09:35:53 - conversational_agent - INFO - sql выполнен успешно, получено 1 строк
+2025-10-22 09:35:53 - conversational_agent - ERROR - Ошибка при обработке сообщения: 'ChatCompletionMessage' object has no attribute 'get'
+Traceback (most recent call last):
+  File "/Users/laurashamykhanova/Desktop/Forte/pharmacy-rag-assistant/agents/conversational_agent.py", line 178, in chat
+    )
+  File "/Users/laurashamykhanova/Desktop/Forte/pharmacy-rag-assistant/agents/conversational_agent.py", line 244, in _chat_openai
+    logger.info("Автоматически выполняем сгенерированный sql...")
+  File "/Users/laurashamykhanova/Desktop/Forte/pharmacy-rag-assistant/agents/conversational_agent.py", line 49, in _format_system_prompt
+    formatted_history = []
+  File "/Users/laurashamykhanova/Library/Python/3.9/lib/python/site-packages/pydantic/main.py", line 991, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'ChatCompletionMessage' object has no attribute 'get'
+2025-10-22 10:01:11 - conversational_agent - INFO - Получено сообщение от пользователя: какой самый продаваемый препарат за последние месяц?
+2025-10-22 10:01:11 - conversational_agent - INFO - Отправка запроса в OpenAI, модель: gpt-4o
+2025-10-22 10:01:14 - conversational_agent - INFO - Получен ответ от AI, tool_calls: 1
+2025-10-22 10:01:14 - conversational_agent - INFO - Вызов инструмента: generate_sql, аргументы: {'query_description': 'Самый продаваемый препарат по количеству за последний месяц'}
+2025-10-22 10:01:15 - conversational_agent - INFO - SQL сгенерирован: SELECT
+    product,
+    SUM(units_sold) as total_units
+FROM sales
+WHERE date >= DATE_TRUNC('month', CURRENT_DATE) - INTERVAL '1 month'
+GROUP BY product
+ORDER BY total_units DESC
+LIMIT 1;
+2025-10-22 10:01:15 - conversational_agent - INFO - Автоматически выполняем сгенерированный sql...
+2025-10-22 10:01:15 - conversational_agent - INFO - sql выполнен успешно, получено 1 строк
+2025-10-22 10:01:17 - conversational_agent - INFO - Ответ сгенерирован успешно, визуализаций: 0
+2025-10-22 10:01:33 - conversational_agent - INFO - Получено сообщение от пользователя: ты это через какой tool сделал?
+2025-10-22 10:01:33 - conversational_agent - INFO - Отправка запроса в OpenAI, модель: gpt-4o
+2025-10-22 10:01:34 - conversational_agent - INFO - Получен ответ от AI, tool_calls: 0
+2025-10-22 10:01:34 - conversational_agent - INFO - Ответ сгенерирован успешно, визуализаций: 0
+2025-10-22 10:01:52 - conversational_agent - INFO - Получено сообщение от пользователя: а чтобы rag использовать какой вопрос должна задатьЮ
+2025-10-22 10:01:52 - conversational_agent - INFO - Отправка запроса в OpenAI, модель: gpt-4o
+2025-10-22 10:01:55 - conversational_agent - INFO - Получен ответ от AI, tool_calls: 0
+2025-10-22 10:01:55 - conversational_agent - INFO - Ответ сгенерирован успешно, визуализаций: 0
+2025-10-22 10:02:12 - conversational_agent - INFO - Получено сообщение от пользователя: Какие аптеки самые популярные в Алматы?
+2025-10-22 10:02:12 - conversational_agent - INFO - Отправка запроса в OpenAI, модель: gpt-4o
+2025-10-22 10:02:13 - conversational_agent - INFO - Получен ответ от AI, tool_calls: 1
+2025-10-22 10:02:13 - conversational_agent - INFO - Вызов инструмента: search_knowledge, аргументы: {'query': 'самые популярные аптеки в Алматы'}
+2025-10-22 10:02:13 - conversational_agent - INFO - Поиск в базе знаний: самые популярные аптеки в Алматы
+2025-10-22 10:02:15 - conversational_agent - INFO - Поиск завершен
+2025-10-22 10:02:16 - conversational_agent - INFO - Ответ сгенерирован успешно, визуализаций: 0
+2025-10-22 10:06:13 - conversational_agent - INFO - Получено сообщение от пользователя: какие аптеки есть в городе Алматы?
+2025-10-22 10:06:13 - conversational_agent - INFO - Отправка запроса в OpenAI, модель: gpt-4o
+2025-10-22 10:06:15 - conversational_agent - INFO - Получен ответ от AI, tool_calls: 1
+2025-10-22 10:06:15 - conversational_agent - INFO - Вызов инструмента: search_knowledge, аргументы: {'query': 'аптеки в городе Алматы'}
+2025-10-22 10:06:15 - conversational_agent - INFO - Поиск в базе знаний: аптеки в городе Алматы
+2025-10-22 10:06:16 - conversational_agent - INFO - Поиск завершен
+2025-10-22 10:06:17 - conversational_agent - INFO - Ответ сгенерирован успешно, визуализаций: 0
+2025-10-22 10:08:16 - conversational_agent - INFO - Получено сообщение от пользователя: какие аптеки есть в городе Алматы?
+2025-10-22 10:08:16 - conversational_agent - INFO - Отправка запроса в OpenAI, модель: gpt-4o
+2025-10-22 10:08:18 - conversational_agent - INFO - Получен ответ от AI, tool_calls: 1
+2025-10-22 10:08:18 - conversational_agent - INFO - Вызов инструмента: search_knowledge, аргументы: {'query': 'аптеки в городе Алматы'}
+2025-10-22 10:08:18 - conversational_agent - INFO - Поиск в базе знаний: аптеки в городе Алматы
+2025-10-22 10:08:19 - conversational_agent - INFO - Поиск завершен
+2025-10-22 10:08:20 - conversational_agent - INFO - Ответ сгенерирован успешно, визуализаций: 0
+2025-10-22 10:16:09 - conversational_agent - INFO - Получено сообщение от пользователя: какие аптеки есть в городе Алматы?
+2025-10-22 10:16:09 - conversational_agent - INFO - Отправка запроса в OpenAI, модель: gpt-4o
+2025-10-22 10:16:11 - conversational_agent - INFO - Получен ответ от AI, tool_calls: 1
+2025-10-22 10:16:11 - conversational_agent - INFO - Вызов инструмента: search_knowledge, аргументы: {'query': 'аптеки в городе Алматы'}
+2025-10-22 10:16:11 - conversational_agent - INFO - Поиск в базе знаний: аптеки в городе Алматы
+2025-10-22 10:16:11 - conversational_agent - INFO - Поиск завершен
+2025-10-22 10:16:13 - conversational_agent - INFO - Ответ сгенерирован успешно, визуализаций: 0

@@ -1,0 +1,55 @@
+2025-10-21 14:16:17 - sql_agent - INFO - Генерация SQL для запроса: Сравнить общие продажи (выручку) за последние два месяца по всей аптечной сети.
+2025-10-21 14:16:17 - sql_agent - INFO - Использование OpenAI модели: gpt-4o
+2025-10-21 14:16:19 - sql_agent - INFO - SQL успешно сгенерирован: WITH current_month AS (
+    SELECT SUM(revenue) as revenue
+    FROM sales
+    WHERE date >= DATE_TRUNC('month', CURRENT_DATE) AND date < DATE_TRUNC('month', CURRENT_DATE) + INTERVAL '1 month'
+),
+previ...
+2025-10-21 14:25:41 - sql_agent - INFO - Генерация SQL для запроса: Сравнить общие продажи всех категорий за последние 2 месяца
+2025-10-21 14:25:41 - sql_agent - INFO - Использование OpenAI модели: gpt-4o
+2025-10-21 14:25:44 - sql_agent - INFO - SQL успешно сгенерирован: WITH current_month AS (
+    SELECT SUM(revenue) as revenue
+    FROM sales
+    WHERE date >= DATE_TRUNC('month', CURRENT_DATE) AND date < DATE_TRUNC('month', CURRENT_DATE) + INTERVAL '1 month'
+),
+previ...
+2025-10-21 14:29:06 - sql_agent - INFO - Генерация SQL для запроса: Сравнить общие продажи всех препаратов за последние два месяца
+2025-10-21 14:29:06 - sql_agent - INFO - Использование OpenAI модели: gpt-4o
+2025-10-21 14:29:09 - sql_agent - INFO - SQL успешно сгенерирован: WITH current_month AS (
+    SELECT SUM(revenue) as revenue
+    FROM sales
+    WHERE date >= DATE_TRUNC('month', CURRENT_DATE) AND date < DATE_TRUNC('month', CURRENT_DATE) + INTERVAL '1 month'
+),
+previ...
+2025-10-21 14:33:01 - sql_agent - INFO - Генерация SQL для запроса: Топ-10 препаратов по продажам за последний год
+2025-10-21 14:33:01 - sql_agent - INFO - Использование OpenAI модели: gpt-4o
+2025-10-21 14:33:03 - sql_agent - INFO - SQL успешно сгенерирован: SELECT
+    product,
+    SUM(revenue) as total_revenue,
+    SUM(units_sold) as total_units
+FROM sales
+WHERE date >= '2022-10-01'
+GROUP BY product
+ORDER BY total_revenue DESC
+LIMIT 10;...
+2025-10-22 09:35:52 - sql_agent - INFO - Генерация sql для запроса: Найти самый продаваемый препарат по выручке за текущий год
+2025-10-22 09:35:52 - sql_agent - INFO - Использование OpenAI модели: gpt-4o
+2025-10-22 09:35:53 - sql_agent - INFO - SQL успешно сгенерирован: SELECT
+    product,
+    SUM(revenue) as total_revenue
+FROM sales
+WHERE DATE_TRUNC('year', date) = DATE_TRUNC('year', CURRENT_DATE)
+GROUP BY product
+ORDER BY total_revenue DESC
+LIMIT 1;...
+2025-10-22 10:01:14 - sql_agent - INFO - Генерация sql для запроса: Самый продаваемый препарат по количеству за последний месяц
+2025-10-22 10:01:14 - sql_agent - INFO - Использование OpenAI модели: gpt-4o
+2025-10-22 10:01:15 - sql_agent - INFO - SQL успешно сгенерирован: SELECT
+    product,
+    SUM(units_sold) as total_units
+FROM sales
+WHERE date >= DATE_TRUNC('month', CURRENT_DATE) - INTERVAL '1 month'
+GROUP BY product
+ORDER BY total_units DESC
+LIMIT 1;...
