@@ -68,7 +68,6 @@ SQL_MODEL=gpt-4o
 SQL_TEMPERATURE=0.0
 CONVERSATIONAL_TEMPERATURE=0.5
 ```
-
 ## Развертывание
 
 1. `pip install -r requirements.txt`  базовые зависимости (Streamlit, langchain, plotly, psycopg)
